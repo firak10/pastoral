@@ -230,47 +230,10 @@
       line-height: 1.55;
     }
 
-    .code-label {
-      display: block;
-      margin: 0 0 8px;
-      text-align: left;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .pix-code {
-      width: 100%;
-      min-height: 116px;
-      padding: 15px 16px;
-      resize: vertical;
-      border: 1px solid #cbd7df;
-      border-radius: 14px;
-      color: var(--ink);
-      background: #fcfefd;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.85rem;
-      line-height: 1.55;
-      word-break: break-all;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-    }
-
-    .pix-code:hover {
-      border-color: #adc1cd;
-    }
-
-    .pix-code:focus {
-      border-color: var(--pix);
-      outline: none;
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(0, 168, 132, 0.13);
-    }
-
     .copy-button {
       display: inline-flex;
       width: 100%;
       min-height: 55px;
-      margin-top: 17px;
       align-items: center;
       justify-content: center;
       gap: 10px;
@@ -296,8 +259,7 @@
       transform: translateY(0);
     }
 
-    .copy-button:focus-visible,
-    .pix-code:focus-visible {
+    .copy-button:focus-visible {
       outline: 3px solid rgba(226, 189, 118, 0.96);
       outline-offset: 3px;
     }
@@ -308,15 +270,12 @@
     }
 
     .copy-icon-success,
-    .button-label-copied,
-    .status-success,
-    .status-empty,
-    .status-error {
+    .button-label-copied {
       display: none;
     }
 
     .copy-button.is-copied {
-      background: #3f474c !important;
+      background: #424242 !important;
       box-shadow: 0 10px 19px rgba(32, 50, 71, 0.18);
     }
 
@@ -330,38 +289,12 @@
       display: inline-flex;
     }
 
-    .status-message {
-      min-height: 25px;
-      margin: 15px 0 0;
+    .status {
+      margin-top: 15px;
       font-size: 0.88rem;
       font-weight: 600;
-    }
-
-    .status-success {
       color: var(--pix);
-    }
-
-    .status-empty {
-      color: var(--warning);
-    }
-
-    .status-error {
-      color: var(--danger);
-    }
-
-    .status-success.is-visible,
-    .status-empty.is-visible,
-    .status-error.is-visible {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-    }
-
-    .status-message svg {
-      flex: 0 0 auto;
-      width: 17px;
-      height: 17px;
+      display: none;
     }
 
     .help-card {
@@ -497,37 +430,20 @@
     </div>
    </header>
    <main class="payment-layout">
-    <section data-template-id="payment-card" class="canva-card payment-card" aria-labelledby="payment-title">
+    <section data-template-id="payment-card" class="canva-card payment-card" aria-labelledby="titulo">
      <div class="pix-mark" aria-hidden="true"><i data-lucide="zap"></i></div>
-     <h2 data-template-id="payment-title" id="payment-title" class="canva-text payment-title">Pagamento via Pix</h2>
-     <p data-template-id="payment-description" id="payment-description" class="canva-text payment-description">Toque no botão abaixo para copiar o código e pagar no aplicativo do seu banco.</p>
+     <h2 data-template-id="payment-title" id="titulo" class="canva-text payment-title">Pagamento via Pix</h2>
+     <p data-template-id="payment-description" id="descricao" class="canva-text payment-description">Toque no botão abaixo para copiar o código e pagar no aplicativo do seu banco.</p>
      
-     <form id="pix-form">
-      <label data-template-id="pix-code-label" class="canva-text code-label" for="pix-code">Código Copia e Cola:</label> 
-      <textarea data-template-id="pix-code-input" class="canva-input pix-code" id="pix-code" name="pix-code" aria-describedby="pix-copy-instruction" spellcheck="false" readonly></textarea>
-      <p id="pix-copy-instruction" class="sr-only">Cole o código Pix e selecione o botão para copiá-lo.</p>
-      
-      <button data-template-id="copy-button" id="copy-button" class="canva-button copy-button" type="submit"> 
-        <i data-lucide="copy" class="copy-icon-default" aria-hidden="true"></i> 
-        <i data-lucide="check" class="copy-icon-success" aria-hidden="true"></i> 
-        <span data-template-id="copy-button-label" id="btn-text-default" class="canva-text button-label-default">Copiar Código Pix</span> 
-        <span data-template-id="copied-button-label" id="btn-text-copied" class="canva-text button-label-copied">Código Copiado!</span> 
-      </button>
-     </form>
+     <button data-template-id="copy-button" class="canva-button copy-button" id="btnCopiar" onclick="copiarPix()"> 
+       <i data-lucide="copy" class="copy-icon-default" aria-hidden="true"></i> 
+       <i data-lucide="check" class="copy-icon-success" aria-hidden="true"></i> 
+       <span data-template-id="copy-button-label" class="canva-text button-label-default">Copiar Código Pix</span> 
+       <span data-template-id="copied-button-label" class="canva-text button-label-copied">Código Copiado!</span> 
+     </button>
 
-     <div class="status-message" aria-live="polite">
-      <div id="status-success" class="status-success">
-        <i data-lucide="circle-check" aria-hidden="true"></i> 
-        <span data-template-id="status-success-text" id="status-success-text" class="canva-text">✓ Pix copiado automaticamente!</span>
-      </div>
-      <div id="status-empty" class="status-empty">
-        <i data-lucide="circle-alert" aria-hidden="true"></i> 
-        <span data-template-id="status-empty-text" class="canva-text">Nenhum código Pix foi encontrado na URL.</span>
-      </div>
-      <div id="status-error" class="status-error">
-        <i data-lucide="copy-x" aria-hidden="true"></i> 
-        <span data-template-id="status-error-text" class="canva-text">Erro ao copiar. Selecione o código e copie manualmente.</span>
-      </div>
+     <div class="status" id="statusMsg">
+       ✓ Pix copiado automaticamente!
      </div>
     </section>
 
@@ -539,7 +455,7 @@
      <ol class="guide-list">
       <li data-template-id="guide-item-1" class="canva-text">Copie o código usando o botão ao lado.</li>
       <li data-template-id="guide-item-2" class="canva-text">Abra o aplicativo do seu banco.</li>
-      <li data-template-id="guide-item-3" class="canva-text">Escolha a opção <b>Pix Copia e Cola</b> e finalize.</li>
+      <li data-template-id="guide-item-3" class="canva-text">Escolha a opção <b>Pix </b> Cole a chave e finalize.</li>
      </ol>
      <div class="bank-note">
       <i data-lucide="shield-check" aria-hidden="true"></i>
@@ -548,70 +464,51 @@
     </aside>
    </main>
    <footer>
-    <p data-template-id="footer-note" class="canva-text">Mídia e Automação Pastoral — Tecnologia e Gestão</p>
+    <p data-template-id="footer-note" class="canva-text">Digital Card - Cartões e Tags inteligentes (42) 999 359 359</p>
    </footer>
   </div>
 
   <script>
-    // Recupera a chave Pix da URL (suporta parâmetro '?' ou caminho '/copialinkpagamento/')
+    // Lê a chave tanto se for via '?' quanto via '/'
     let rawData = window.location.search
       ? window.location.search.substring(1)
       : window.location.pathname.replace('/copialinkpagamento/', '');
 
     const payloadPix = decodeURIComponent(rawData);
 
-    const pixForm = document.getElementById("pix-form");
-    const pixCode = document.getElementById("pix-code");
-    const copyButton = document.getElementById("copy-button");
-    const successMessage = document.getElementById("status-success");
-    const emptyMessage = document.getElementById("status-empty");
-    const errorMessage = document.getElementById("status-error");
-    const paymentDescription = document.getElementById("payment-description");
-
-    function clearMessages() {
-      successMessage.classList.remove("is-visible");
-      emptyMessage.classList.remove("is-visible");
-      errorMessage.classList.remove("is-visible");
-    }
-
     function copiarPix() {
-      clearMessages();
-
       if (!payloadPix) {
-        emptyMessage.classList.add("is-visible");
-        copyButton.classList.remove("is-copied");
+        alert("Nenhum código Pix encontrado na URL.");
         return;
       }
 
       navigator.clipboard.writeText(payloadPix)
         .then(() => {
-          copyButton.classList.add("is-copied");
-          successMessage.classList.add("is-visible");
-          paymentDescription.innerText = "O código Pix foi copiado para a área de transferência. Agora é só abrir o aplicativo do seu banco e colar.";
+          // A cópia realmente foi aceita pelo navegador
+          const btn = document.getElementById('btnCopiar');
+          const status = document.getElementById('statusMsg');
+          const titulo = document.getElementById('titulo');
+          const descricao = document.getElementById('descricao');
+
+          // Altera a interface
+          titulo.innerText = "Pagamento via Pix";
+          descricao.innerText = "O código Pix foi copiado para a área de transferência. Agora é só abrir o aplicativo do seu banco e colar.";
+
+          btn.classList.add('is-copied');
+          status.innerText = "✓ Pix copiado automaticamente!";
+          status.style.display = "block";
         })
         .catch(err => {
-          console.log("Cópia automática bloqueada pelo navegador:", err);
-          copyButton.classList.remove("is-copied");
+          // O navegador bloqueou a cópia automática.
+          console.log("Cópia automática bloqueada:", err);
         });
     }
 
-    pixForm.addEventListener("submit", function(event) {
-      event.preventDefault();
-      copiarPix();
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-      // Exibe a chave recebida no textarea
-      if (payloadPix) {
-        pixCode.value = payloadPix;
-      }
-
-      // Renderiza os ícones do Lucide
+    // Tenta copiar automaticamente assim que a página terminar de carregar
+    window.addEventListener('load', () => {
       if (window.lucide) {
         lucide.createIcons();
       }
-
-      // Tenta copiar automaticamente assim que carrega a página
       copiarPix();
     });
   </script>
