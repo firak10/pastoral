@@ -30,11 +30,12 @@
 
     html {
       background: #edf2f3;
+      height: 100%;
     }
 
     body {
       width: 100%;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      min-height: 100vh;
       margin: 0;
       color: var(--ink);
       font-family: "DM Sans", sans-serif;
@@ -42,20 +43,26 @@
         radial-gradient(circle at 88% 8%, rgba(226, 189, 118, 0.27), transparent 22rem),
         radial-gradient(circle at 9% 94%, rgba(0, 168, 132, 0.1), transparent 23rem),
         linear-gradient(180deg, #e7eef2 0%, #f9f8f2 48%, #eef3f3 100%);
+      display: flex;
+      flex-direction: column;
     }
 
     .payment-shell {
       width: 100%;
       max-width: 1080px;
       margin: 0 auto;
-      padding: 30px 20px 38px;
+      padding: 30px 20px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* TOPO REDUZIDO VERTICALMENTE */
     .hero-card {
       position: relative;
       display: grid;
       grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
-      min-height: 258px;
+      min-height: 180px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 28px;
@@ -68,27 +75,27 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 46px 48px;
+      padding: 24px 36px;
       background:
         linear-gradient(90deg, rgba(12, 38, 68, 1) 0%, rgba(18, 53, 91, 0.97) 74%, rgba(18, 53, 91, 0.72) 100%);
     }
 
     .hero-copy::before {
       position: absolute;
-      top: 25px;
-      left: 29px;
+      top: 15px;
+      left: 20px;
       color: rgba(226, 189, 118, 0.46);
       content: "✦";
-      font-size: 3.25rem;
+      font-size: 2.25rem;
       line-height: 1;
     }
 
     .hero-copy::after {
       position: absolute;
-      right: 33px;
-      bottom: 27px;
-      width: 92px;
-      height: 92px;
+      right: 20px;
+      bottom: 15px;
+      width: 60px;
+      height: 60px;
       border: 1px solid rgba(226, 189, 118, 0.24);
       border-radius: 50%;
       content: "";
@@ -96,7 +103,7 @@
 
     .hero-visual {
       position: relative;
-      min-height: 258px;
+      min-height: 180px;
       background: var(--navy);
     }
 
@@ -113,7 +120,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      min-height: 258px;
+      min-height: 180px;
       object-fit: cover;
       filter: saturate(0.88) contrast(1.04);
     }
@@ -123,7 +130,7 @@
       align-items: center;
       gap: 0.58rem;
       width: fit-content;
-      margin: 0 0 13px;
+      margin: 0 0 6px;
       text-transform: uppercase;
       color: var(--gold);
       font-size: 0.75rem;
@@ -150,15 +157,15 @@
       line-height: 1.1;
       letter-spacing: -0.025em;
       color: #ffffff;
-      font-size: 1.85rem;
+      font-size: 1.6rem;
     }
 
     .hero-subtitle {
       max-width: 500px;
-      margin: 15px 0 0;
+      margin: 8px 0 0;
       color: #dce4ea;
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-size: 0.88rem;
+      line-height: 1.4;
     }
 
     .payment-layout {
@@ -374,8 +381,10 @@
       color: var(--pix);
     }
 
+    /* FOOTER FIXO NA PARTE INFERIOR */
     footer {
-      padding-top: 25px;
+      margin-top: auto;
+      padding: 20px 0 10px;
       text-align: center;
       font-size: 0.82rem;
       color: var(--muted);
@@ -383,7 +392,7 @@
 
     @media (max-width: 760px) {
       .payment-shell {
-        padding: 16px 14px 28px;
+        padding: 16px 14px 16px;
       }
 
       .hero-card,
@@ -391,14 +400,18 @@
         grid-template-columns: 1fr;
       }
 
+      .hero-card {
+        min-height: auto;
+      }
+
       .hero-copy {
-        min-height: 238px;
-        padding: 39px 29px 35px;
+        min-height: 150px;
+        padding: 24px 20px;
       }
 
       .hero-visual,
       .hero-image {
-        min-height: 190px;
+        min-height: 140px;
       }
 
       .hero-visual::after {
@@ -426,7 +439,7 @@
      <p data-template-id="page-subtitle" class="canva-text hero-subtitle">Copie o código abaixo para efetuar a transferência no aplicativo do seu banco.</p>
     </div>
     <div class="hero-visual">
-      <img data-template-id="hero-image" class="canva-image hero-image" loading="lazy" src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=800&q=80" alt="Culto e Louvor Pastoral">
+      <img data-template-id="hero-image" class="canva-image hero-image" loading="lazy" src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Culto e Louvor Pastoral">
     </div>
    </header>
    <main class="payment-layout">
@@ -436,10 +449,10 @@
      <p data-template-id="payment-description" id="descricao" class="canva-text payment-description">Toque no botão abaixo para copiar o código e pagar no aplicativo do seu banco.</p>
      
      <button data-template-id="copy-button" class="canva-button copy-button" id="btnCopiar" onclick="copiarPix()"> 
-       <i data-lucide="copy" class="copy-icon-default" aria-hidden="true"></i> 
-       <i data-lucide="check" class="copy-icon-success" aria-hidden="true"></i> 
-       <span data-template-id="copy-button-label" class="canva-text button-label-default">Copiar Código Pix</span> 
-       <span data-template-id="copied-button-label" class="canva-text button-label-copied">Código Copiado!</span> 
+        <i data-lucide="copy" class="copy-icon-default" aria-hidden="true"></i> 
+        <i data-lucide="check" class="copy-icon-success" aria-hidden="true"></i> 
+        <span data-template-id="copy-button-label" class="canva-text button-label-default">Copiar Código Pix</span> 
+        <span data-template-id="copied-button-label" class="canva-text button-label-copied">Código Copiado!</span> 
      </button>
 
      <div class="status" id="statusMsg">
